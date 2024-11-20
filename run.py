@@ -249,6 +249,10 @@ async def ConnectMetaTrader(update: Update, trade: dict, enterTrade: bool):
             # uses ask price if the order type is a sell
             if(trade['OrderType'] == 'Sell'):
                 trade['Entry'] = float(price['ask'])
+                
+        # Convert trade['Entry'] to float before any further operations # Add new 20/11/2024
+        if isinstance(trade['Entry'], str):
+            trade['Entry'] = float(trade['Entry'])
 
         # produces a table with trade information
         GetTradeInformation(update, trade, account_information['balance'])
